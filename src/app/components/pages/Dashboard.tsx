@@ -331,7 +331,7 @@ export function Dashboard() {
                 className="p-3 rounded-lg bg-gradient-to-r from-teal-50 to-emerald-50 border border-teal-200"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5 + index * 0.1 }}
+                transition={{ duration: 0.2, delay: index * 0.05 }}
                 whileHover={{ x: 4 }}
               >
                 <div className="flex gap-2">

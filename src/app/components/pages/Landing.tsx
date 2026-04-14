@@ -16,7 +16,7 @@ export function Landing() {
   const stats = [
     { value: '247', label: 'Regions Monitored', icon: MapPin, color: 'emerald' },
     { value: '98.5%', label: 'Response Efficiency', icon: TrendingUp, color: 'sky' },
-    { value: '12', label: 'Active Alerts', icon: AlertTriangle, color: 'orange-500' },
+    { value: '12', label: 'Active Alerts', icon: AlertTriangle, color: 'orange' },
   ];
 
   return (
