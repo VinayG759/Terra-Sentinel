@@ -8,6 +8,7 @@ import {
   Clock,
   MapPin,
   TrendingUp,
+  LucideIcon,
 } from 'lucide-react';
 
 const routes = [
@@ -52,19 +53,30 @@ export function Response() {
   const [selectedResource, setSelectedResource] = useState<number | null>(null);
   const [selectedZone, setSelectedZone] = useState<string>('');
 
+  type Color = "emerald" | "sky" | "teal" | "orange";
+
   const statusColors = {
-    available: 'bg-emerald-500',
-    'in-transit': 'bg-sky-500',
-    reached: 'bg-teal-500',
-    pending: 'bg-orange-500',
+    emerald: 'from-emerald-400 to-emerald-600',
+    sky: 'from-sky-400 to-sky-600',
+    teal: 'from-teal-400 to-teal-600',
+    orange: 'from-orange-400 to-orange-600',
   };
 
+  const stats : {label: string; value: string; icon: LucideIcon; color: Color}[] = [
+    { label: 'Available', value: '4', icon: CheckCircle, color: 'emerald' },
+    { label: 'In Transit', value: '2', icon: Clock, color: 'sky' },
+    { label: 'Deployed', value: '1', icon: Ambulance, color: 'teal' },
+    { label: 'Pending', value: '1', icon: Package, color: 'orange' },
+  ]
+
   const statusLabels = {
-    available: 'Available',
-    'in-transit': 'In Transit',
-    reached: 'Reached',
-    pending: 'Pending',
+    available: 'emerald',
+    'in-transit': 'sky',
+    reached: 'teal',
+    pending: 'orange',
   };
+
+  
 
   return (
     <div className="p-6 space-y-6 pb-20">
@@ -275,12 +287,7 @@ export function Response() {
           </h2>
 
           <div className="grid md:grid-cols-4 gap-6">
-            {[
-              { label: 'Available', value: '4', icon: CheckCircle, color: 'emerald' },
-              { label: 'In Transit', value: '2', icon: Clock, color: 'sky' },
-              { label: 'Deployed', value: '1', icon: Ambulance, color: 'teal' },
-              { label: 'Pending', value: '1', icon: Package, color: 'orange' },
-            ].map((metric, index) => {
+            {stats.map((metric, index) => {
               const Icon = metric.icon;
               return (
                 <motion.div
@@ -292,7 +299,7 @@ export function Response() {
                   whileHover={{ scale: 1.05 }}
                 >
                   <div
-                    className={`w-16 h-16 rounded-full bg-gradient-to-br from-${metric.color}-400 to-${metric.color}-600 mx-auto flex items-center justify-center mb-3`}
+                    className={`w-16 h-16 rounded-full bg-gradient-to-br ${statusColors[metric.color]} mx-auto flex items-center justify-center mb-3`}
                   >
                     <Icon className="w-8 h-8 text-white" />
                   </div>

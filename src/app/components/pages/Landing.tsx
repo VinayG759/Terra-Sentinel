@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 import { Link } from 'react-router';
-import { Globe2, TrendingUp, MapPin, Zap, ArrowRight, AlertTriangle } from 'lucide-react';
+import { Globe2, TrendingUp, MapPin, Zap, ArrowRight, AlertTriangle, LucideIcon } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 export function Landing() {
@@ -13,12 +13,19 @@ export function Landing() {
     return () => clearInterval(interval);
   }, []);
 
-  const stats = [
+  type Color = "emerald" | "sky" | "orange";
+  
+  const stats: { value: string; label: string; color: Color; icon: LucideIcon }[] = [
     { value: '247', label: 'Regions Monitored', icon: MapPin, color: 'emerald' },
     { value: '98.5%', label: 'Response Efficiency', icon: TrendingUp, color: 'sky' },
     { value: '12', label: 'Active Alerts', icon: AlertTriangle, color: 'orange' },
   ];
 
+  const colorMap = {
+    emerald: "from-emerald-400 to-emerald-600",
+    sky: "from-sky-400 to-sky-600",
+    orange: "from-orange-400 to-orange-600",
+  };
   return (
     <div className="min-h-screen flex flex-col">
       {/* Hero Section */}
@@ -198,11 +205,11 @@ export function Landing() {
                   className="glass-card p-8 text-center"
                   initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 + index * 0.1 }}
+                  transition={{ delay: 0.6 + index * 0.1, duration:0.2 }}
                   whileHover={{ y: -8, boxShadow: '0 12px 40px rgba(0, 0, 0, 0.1)' }}
                 >
                   <motion.div
-                    className={`w-16 h-16 rounded-full bg-gradient-to-br from-${stat.color}-400 to-${stat.color}-600 mx-auto flex items-center justify-center mb-4`}
+                    className={`w-16 h-16 rounded-full bg-gradient-to-br ${colorMap[stat.color]} mx-auto flex items-center justify-center mb-4`}
                     animate={{ rotate: [0, 360] }}
                     transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
                   >
